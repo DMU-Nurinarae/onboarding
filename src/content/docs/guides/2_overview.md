@@ -1,5 +1,5 @@
 ---
-title: 2. 살펴보기
+title: 살펴보기
 description: Describes about what you'll learn in this onboard process
 ---
 
