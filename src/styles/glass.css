@@ -1,0 +1,171 @@
+html[data-has-hero] {
+    --sl-island-offset: calc(var(--sl-nav-height) * 0.5);
+    --sl-island-inline-gap: 1.5rem;
+    --sl-island-radius: 1rem;
+}
+
+/* Floating "island" navbar shell (PageFrame header) */
+html[data-has-hero] .page > header.header {
+    inset-block-start: var(--sl-island-offset) !important;
+    inset-inline-start: 0 !important;
+    inset-inline-end: 0 !important;
+    margin-inline: auto !important;
+    width: min(100% - (2 * var(--sl-island-inline-gap)), 84rem) !important;
+    border: 1px solid
+        color-mix(in srgb, var(--sl-color-hairline-shade) 70%, transparent);
+    border-radius: var(--sl-island-radius) !important;
+    background: color-mix(in srgb, var(--sl-color-bg-nav) 82%, transparent);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.16),
+        0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep page content clear of the lowered floating header */
+html[data-has-hero] .page .main-frame {
+    padding-top: calc(
+        var(--sl-nav-height) + var(--sl-mobile-toc-height) +
+            var(--sl-island-offset)
+    ) !important;
+}
+
+html[data-has-hero] {
+    scroll-padding-top: calc(
+        1.5rem + var(--sl-nav-height) + var(--sl-mobile-toc-height) +
+            var(--sl-island-offset)
+    );
+}
+
+html[data-has-hero] .sidebar-pane {
+    inset-block: calc(var(--sl-nav-height) + var(--sl-island-offset)) 0 !important;
+}
+
+html[data-has-hero] starlight-menu-button button {
+    top: calc(
+        var(--sl-island-offset) +
+            (var(--sl-nav-height) - var(--sl-menu-button-size)) / 2
+    ) !important;
+}
+
+@media (min-width: 72em) {
+    html[data-has-hero] {
+        scroll-padding-top: calc(
+            1.5rem + var(--sl-nav-height) + var(--sl-island-offset)
+        );
+    }
+}
+
+@media (max-width: 50rem) {
+    html[data-has-hero] {
+        --sl-island-offset: calc(var(--sl-nav-height) * 0.42);
+        --sl-island-inline-gap: 1rem;
+        --sl-island-radius: 0.85rem;
+    }
+}
+
+/* Index-only split sections (hero + courses) */
+html[data-has-hero]:has(.index-courses) {
+    --index-top-clearance: calc(
+        var(--sl-nav-height) + var(--sl-island-offset) + 0.8rem
+    );
+}
+
+html[data-has-hero]:has(.index-courses) .page .main-frame {
+    padding-top: 0 !important;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+html[data-has-hero]:has(.index-courses) main {
+    height: 100dvh;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+html[data-has-hero]:has(.index-courses) .content-panel {
+    height: 100dvh;
+    padding: 0 !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html[data-has-hero]:has(.index-courses) .content-panel::-webkit-scrollbar {
+    display: none;
+}
+
+html[data-has-hero]:has(.index-courses) .hero,
+html[data-has-hero]:has(.index-courses) .index-courses {
+    min-height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+html[data-has-hero]:has(.index-courses) .hero {
+    align-content: center;
+    padding: var(--index-top-clearance) var(--sl-content-pad-x) 2rem;
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+html[data-has-hero]:has(.index-courses) .index-courses {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: var(--index-top-clearance) var(--sl-content-pad-x) 3rem;
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+html[data-has-hero]:has(.index-courses) .index-section {
+    opacity: 0.35;
+    transform: translateY(1rem);
+}
+
+html[data-has-hero]:has(.index-courses) .index-section.is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html[data-has-hero]:has(.index-courses) footer {
+    display: none;
+}
+
+html[data-has-hero]:has(.index-courses) .index-progress {
+    position: fixed;
+    inset-inline-end: max(0.9rem, env(safe-area-inset-right));
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    z-index: calc(var(--sl-z-index-navbar) + 1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.65rem 0.55rem;
+    border: 1px solid
+        color-mix(in srgb, var(--sl-color-hairline-shade) 60%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sl-color-bg-nav) 80%, transparent);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+}
+
+html[data-has-hero]:has(.index-courses) .index-dot {
+    width: 0.66rem;
+    height: 0.66rem;
+    border-radius: 999px;
+    border: 1px solid var(--sl-color-gray-2);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+html[data-has-hero]:has(.index-courses) .index-dot.is-active {
+    background: var(--sl-color-white);
+    border-color: var(--sl-color-white);
+}

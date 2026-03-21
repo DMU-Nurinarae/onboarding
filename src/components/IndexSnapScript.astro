@@ -1,0 +1,93 @@
+<script is:inline>
+	const panel = document.querySelector('.content-panel');
+	const hero = document.querySelector('.hero');
+	const courses = document.querySelector('.index-courses');
+	const dots = Array.from(document.querySelectorAll('.index-dot'));
+
+	if (panel && hero && courses && dots.length === 2) {
+		try {
+			if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+		} catch {}
+
+		hero.setAttribute('data-index-section', '0');
+		hero.classList.add('index-section');
+		courses.classList.add('index-section');
+
+		const sections = [hero, courses];
+		let current = 0;
+		let locked = false;
+		let rafId = 0;
+
+		const scrollToSection = (nextIndex) => {
+			const targetIndex = Math.max(0, Math.min(sections.length - 1, nextIndex));
+			const target = sections[targetIndex];
+			const panelTop = panel.getBoundingClientRect().top;
+			const targetTop = target.getBoundingClientRect().top;
+			const top = panel.scrollTop + (targetTop - panelTop);
+			panel.scrollTo({ top, behavior: 'smooth' });
+		};
+
+		const setActive = (index) => {
+			current = index;
+			sections.forEach((section, i) => {
+				section.classList.toggle('is-active', i === index);
+			});
+			dots.forEach((dot, i) => {
+				dot.classList.toggle('is-active', i === index);
+				dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+			});
+		};
+
+		const syncActiveByScroll = () => {
+			const mid = panel.scrollTop + panel.clientHeight / 2;
+			let next = 0;
+			let best = Number.POSITIVE_INFINITY;
+			sections.forEach((section, idx) => {
+				const center = section.offsetTop + section.offsetHeight / 2;
+				const distance = Math.abs(center - mid);
+				if (distance < best) {
+					best = distance;
+					next = idx;
+				}
+			});
+			setActive(next);
+		};
+
+		panel.scrollTop = 0;
+		scrollToSection(0);
+		setActive(0);
+
+		panel.addEventListener('scroll', () => {
+			if (rafId) cancelAnimationFrame(rafId);
+			rafId = requestAnimationFrame(syncActiveByScroll);
+		});
+
+		panel.addEventListener(
+			'wheel',
+			(event) => {
+				if (locked) return;
+				if (Math.abs(event.deltaY) < 8) return;
+				event.preventDefault();
+				locked = true;
+				scrollToSection(current + (event.deltaY > 0 ? 1 : -1));
+				setTimeout(() => {
+					locked = false;
+				}, 550);
+			},
+			{ passive: false }
+		);
+
+		dots.forEach((dot) => {
+			dot.addEventListener('click', () => {
+				const idx = Number(dot.getAttribute('data-index-target') || 0);
+				scrollToSection(idx);
+			});
+		});
+
+		requestAnimationFrame(() => {
+			panel.scrollTop = 0;
+			scrollToSection(0);
+			setActive(0);
+		});
+	}
+</script>

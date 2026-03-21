@@ -1,40 +1,46 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: We build systems
+description: Start learn how to develop in DMU Nurinarae
 template: splash # Remove or comment out this line to display the site sidebar on this page.
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: 누리나래 온보딩 페이지에 오신 것을 환영합니다!
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/dgl.png
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: 🛫 시작하기
+      link: /guides/intro/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+import IndexSnapScript from '../../components/IndexSnapScript.astro';
 
-## Next steps
+<div class="index-progress" role="navigation" aria-label="섹션 진행 상태">
+	<button class="index-dot is-active" data-index-target="0" aria-label="인삿말 섹션"></button>
+	<button class="index-dot" data-index-target="1" aria-label="학습 코스 섹션"></button>
+</div>
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+<section class="index-courses" data-index-section="1">
+
+	<CardGrid stagger>
+		<Card title="기본적인 지식 배우기" icon="pencil">
+			<LinkButton href="/guides/example/">전자공학 입문</LinkButton>
+			<LinkButton href="/guides/example/">프로젝트 관리</LinkButton>
+		</Card>
+		<Card title="펌웨어 공부하기" icon="document">
+			Delete `template: splash` in `src/content/docs/index.mdx` to display a
+			sidebar on this page.
+		</Card>
+		<Card title="회로 공부하기" icon="add-document">
+			Add Markdown or MDX files to `src/content/docs` to create new pages.
+		</Card>
+		<Card title="하드웨어 공부하기" icon="setting">
+			<LinkButton href="/cad/intro/">캐드 입문</LinkButton>
+		</Card>
+		<Card title="미니 프로젝트" icon="open-book">
+			Learn more in [the Starlight Docs](https://starlight.astro.build/).
+		</Card>
+	</CardGrid>
+</section>
+
+<IndexSnapScript />
