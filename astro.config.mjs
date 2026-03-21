@@ -20,19 +20,11 @@ export default defineConfig({
       sidebar: [
         {
           label: "오리엔테이션",
-          items: [
-            { label: "들어가며", slug: "guides/intro" },
-            { label: "살펴보기", slug: "guides/overview" },
-            { label: "개발 문화", slug: "guides/dev_culture" },
-          ],
+          autogenerate: {directory: "guides"},
         },
         {
           label: "캐드와 3D 프린팅",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "캐드 알아보기", slug: "cad/intro" },
-            { label: "Fusion 설치하기", slug: "cad/install" },
-          ],
+          autogenerate: {directory: "cad"},
         },
         {
           label: "Reference",

@@ -1,5 +1,5 @@
 ---
-title: 오리엔테이션
+title: 1. 오리엔테이션
 description: Introduction of onboarding process
 ---
 ### 🚀 Welcome!
