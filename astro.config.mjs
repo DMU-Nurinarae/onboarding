@@ -22,14 +22,6 @@ export default defineConfig({
           label: "오리엔테이션",
           autogenerate: {directory: "guides"},
         },
-        {
-          label: "캐드와 3D 프린팅",
-          autogenerate: {directory: "cad"},
-        },
-        {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
-        },
       ],
     }),
   ],
