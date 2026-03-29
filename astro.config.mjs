@@ -22,6 +22,10 @@ export default defineConfig({
           label: "오리엔테이션",
           autogenerate: {directory: "guides"},
         },
+        {
+          label: "소프트웨어",
+          autogenerate: {directory: "software"},
+        },
       ],
     }),
   ],
