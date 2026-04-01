@@ -23,8 +23,12 @@ export default defineConfig({
           autogenerate: {directory: "guides"},
         },
         {
-          label: "소프트웨어",
-          autogenerate: {directory: "software"},
+          label: "Python",
+          autogenerate: {directory: "python"},
+        },
+        {
+          label: "Arduino",
+          autogenerate: {directory: "arduino"},
         },
       ],
     }),
