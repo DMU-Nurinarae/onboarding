@@ -30,6 +30,10 @@ export default defineConfig({
           label: "Arduino",
           autogenerate: {directory: "arduino"},
         },
+        {
+          label: "KiCad",
+          autogenerate: {directory: "kicad"},
+        },
       ],
     }),
   ],
